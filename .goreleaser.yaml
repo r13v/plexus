@@ -56,20 +56,23 @@ changelog:
       - 'Merge pull request'
       - 'Merge branch'
 
-brews:
+homebrew_casks:
   - name: plexus
+    binary: plexus
     repository:
       owner: r13v
       name: homebrew-apps
       token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
-    directory: Formula
+    directory: Casks
     homepage: "https://github.com/r13v/plexus"
     description: "Code-graph CLI: callers, neighbors, paths, communities across Go/Python/JS/TS repos"
     license: "MIT"
-    test: |
-      system "#{bin}/plexus", "version"
-    install: |
-      bin.install "plexus"
+    hooks:
+      post:
+        install: |
+          if OS.mac? && Hardware::CPU.arm?
+            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/plexus"]
+          end
 
 # scoops: deferred until r13v/scoop-bucket exists (Post-Completion).
 

@@ -31,7 +31,7 @@ Additional languages are explicit future work.
 ## Install
 
 ```bash
-brew install r13v/apps/plexus
+brew install --cask r13v/apps/plexus
 # or
 curl -fsSL https://raw.githubusercontent.com/r13v/plexus/main/install.sh | sh
 # or
@@ -143,5 +143,5 @@ Plexus uses [Conventional Commits](https://www.conventionalcommits.org/) on
 
 A merge to `main` with a qualifying commit triggers a tag bump via
 `mathieudutour/github-tag-action`, which fires the goreleaser workflow that
-publishes multi-OS archives + updates the Homebrew formula in
+publishes multi-OS archives + updates the Homebrew cask in
 `r13v/homebrew-apps`.
