@@ -1,0 +1,8 @@
+Nodes: 3
+Edges: 2
+Communities: 2
+
+Top by degree:
+  FuncB()  b.go:20  (degree=2)
+  FuncA()  a.go:10  (degree=1)
+  FuncC()  c.go:30  (degree=1)

@@ -1,0 +1,8 @@
+digraph plexus {
+  rankdir=LR;
+  "func_a" [label="FuncA()", shape=ellipse, style=filled, fillcolor="#a6cee3"];
+  "func_b" [label="FuncB()", shape=ellipse, style=filled, fillcolor="#a6cee3"];
+  "func_c" [label="FuncC()", shape=ellipse, style=filled, fillcolor="#b2df8a"];
+  "func_a" -> "func_b" [label="calls", style=solid];
+  "func_b" -> "func_c" [label="calls", style=solid];
+}

@@ -1,0 +1,1 @@
+NODE FuncA()  a.go:10  [community=0]

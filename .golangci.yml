@@ -1,0 +1,48 @@
+version: "2"
+
+run:
+  timeout: 5m
+
+formatters:
+  enable:
+    - gofumpt
+
+  settings:
+    gofumpt:
+      extra-rules: true
+
+linters:
+  enable:
+    - errcheck
+    - govet
+    - staticcheck
+    - unused
+    - ineffassign
+    - gocritic
+    - revive
+    - misspell
+    - prealloc
+    - unconvert
+    - unparam
+    - errname
+    - exhaustive
+    - nilerr
+
+  exclusions:
+    paths:
+      - node_modules
+
+  settings:
+    gocritic:
+      enabled-tags:
+        - diagnostic
+        - style
+        - performance
+    revive:
+      rules:
+        - name: blank-imports
+        - name: exported
+        - name: unused-parameter
+        - name: unreachable-code
+    exhaustive:
+      default-signifies-exhaustive: true

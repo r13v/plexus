@@ -1,0 +1,8 @@
+package main
+
+func broken( {
+	// missing closing paren — syntactically invalid Go
+	return
+}
+
+type Incomplete struct {

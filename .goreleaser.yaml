@@ -1,0 +1,81 @@
+version: 2
+
+project_name: plexus
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: plexus
+    main: ./cmd/plexus
+    binary: plexus
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w -X github.com/r13v/plexus/internal/cli.version={{.Version}}
+
+archives:
+  - id: default
+    name_template: >-
+      {{ .ProjectName }}_{{ .Version }}_
+      {{- if eq .Os "darwin" }}darwin
+      {{- else }}{{ .Os }}{{ end }}_
+      {{- .Arch }}
+    formats: [tar.gz]
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+    files:
+      - LICENSE
+      - README.md
+
+checksum:
+  name_template: 'checksums.txt'
+  algorithm: sha256
+
+snapshot:
+  version_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  use: github
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^ci:'
+      - '^chore:'
+      - 'Merge pull request'
+      - 'Merge branch'
+
+brews:
+  - name: plexus
+    repository:
+      owner: r13v
+      name: homebrew-apps
+      token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
+    directory: Formula
+    homepage: "https://github.com/r13v/plexus"
+    description: "Code-graph CLI: callers, neighbors, paths, communities across Go/Python/JS/TS repos"
+    license: "MIT"
+    test: |
+      system "#{bin}/plexus", "version"
+    install: |
+      bin.install "plexus"
+
+# scoops: deferred until r13v/scoop-bucket exists (Post-Completion).
+
+release:
+  github:
+    owner: r13v
+    name: plexus
+  draft: false
+  prerelease: auto

@@ -1,0 +1,3 @@
+NODE FuncB()  b.go:20  [community=0]
+NODE FuncA()  a.go:10  [community=0]
+EDGE FuncA() --calls--> FuncB()
