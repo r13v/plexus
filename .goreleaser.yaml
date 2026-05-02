@@ -58,7 +58,7 @@ changelog:
 
 homebrew_casks:
   - name: plexus
-    binary: plexus
+    binaries: [plexus]
     repository:
       owner: r13v
       name: homebrew-apps
